@@ -1,18 +1,14 @@
 // Assignment Code
-
 var generateBtn = document.querySelector("#generate");
 var rndNumber = "0123456789";
 var rndSpecial = "!@#$%^&*()_+";
 var rndUpper = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
 var rndLower = rndUpper.toLowerCase();
-
-document.getElementById("generate").onclick = function () {
-  clickGp();
-};
+var password = "";
 
 function writePassword() {
-  var password = generatePW();
   var passwordText = document.querySelector("#password");
+  console.log(password);
   passwordText.value = password;
 }
 
@@ -24,7 +20,6 @@ function generatePW() {
 }
 
 function clickGp() {
-  
   var options = {};
 
   options.length = parseInt(
@@ -52,23 +47,23 @@ function clickGp() {
     "would you like to use special characters in your password?"
   );
 
-  var password = "";
   for (var i = 0; i < options.length; i++) {
     if (options.rndNumber) {
-      password += getRandomValue(rndNumber[i]);
+      password += getRandomValue(rndNumber);
     }
     if (options.rndUpper) {
-      password += getRandomValue(rndUpper[i]);
+      password += getRandomValue(rndUpper);
     }
     if (options.rndLower) {
-      password += getRandomValue(rndLower[i]);
+      password += getRandomValue(rndLower);
     }
     if (options.rndSpecial) {
-      password += getRandomValue(rndSpecial[i]);
+      password += getRandomValue(rndSpecial);
     }
   }
   console.log(options.length);
-  return password.substring(0, options.length);
+  password = password.substring(0, options.length);
+  return password;
 }
 
 function getRandomValue(str) {
@@ -76,15 +71,8 @@ function getRandomValue(str) {
 }
 
 function shuffle(str) {}
-generateBtn.addEventListener("click", writePassword);
 
-// Write password to the #password input
-//function writePassword() {
-// var password = generatePassword();
-// var passwordText = document.querySelector("#password");
-
-// passwordText.value = password;
-
-//}
-
-// Add event listener to generate button
+generateBtn.addEventListener("click", function () {
+  clickGp();
+  writePassword();
+});
